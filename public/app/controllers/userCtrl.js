@@ -1,20 +1,41 @@
 angular.module('userControllers', [])
-.controller('registerController', function($scope, $http, $timeout, $location) {
+.controller('registerController', function($scope, $timeout, $location, userFactory) {
 	$scope.registerUser = function() {
-		$scope.loading = true;
-		$scope.errorMessage = false;
-		$http.post('/api/users', $scope.user).then(function(data) {
-			console.log(data)
+		$scope.warning = {};
+		$scope.warning.loading = true;
+		$scope.warning.errorMessage = false;
+	  userFactory.createUser($scope.user).then(function(data) {
 			if (data.data.success) {
-				$scope.loading = false;
-				$scope.successMessage = data.data.mesage + "Redirecting";
+				$scope.warning.loading = false;
+				$scope.warning.successMessage = data.data.message + "Redirecting";
 				$timeout(function() {
 					$location.path('/');
 				}, 2000);
 			} else {
-				$scope.loading = false;
-				$scope.errorMessage = data.data.message;
+				$scope.warning.loading = false;
+				$scope.warning.errorMessage = data.data.message;
 			}
 		});
 	};
+})
+
+.controller('loginController', function($scope,$timeout, $location, userFactory) {
+	$scope.login = function() {
+		$scope.warning = {};
+		$scope.warning.loading = true;
+		$scope.warning.errorMessage = false;
+		userFactory.loginUser($scope.user).then(function(data) {
+			console.log(data)
+			if (data.data.success) {
+				$scope.warning.loading = false;
+				$scope.warning.successMessage = data.data.message + "Redirecting";
+				$timeout(function() {
+					$location.path('/');
+				}, 2000);
+			} else {
+				$scope.warning.loading = false;
+				$scope.warning.errorMessage = data.data.message;
+			}
+		})
+	}
 });

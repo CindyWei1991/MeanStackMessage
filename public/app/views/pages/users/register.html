@@ -10,22 +10,21 @@
 	<br>
 	<!--password -->
 	<label>Password: </label>
-	<input type="text" name="password" class="form-control" placeholder="Please enter password" ng-model="password">
+	<input type="text" name="password" class="form-control" placeholder="Please enter password" ng-model="user.password">
 	<br>
 	<button type="submit" class="btn btn-primary">Register</button>
 </form>
 
 
 <!-- Loading Icon (Bootstrap) -->
-<div class="jumbotron text-center" ng-show="true">
-{{loading}}
+<div class="jumbotron text-center" ng-show="warning.loading">
     <span class="glyphicon glyphicon-repeat spinner"></span>
     <p>Loading....</p>
 </div>
 <!-- Loading Icon (Bootstrap) -->
 
 <!-- Custom Messages -->
-<div class="row show-hide-message" ng-show="{{successMessage|| errorMessage}}">
-    <div ng-class="alert">{{ successMsg || errorMsg }}</div>
+<div class="row" ng-show="warning.successMessage|| warning.errorMessage">
+    <div class="alert alert-danger">{{ warning.successMessage || warning.errorMessage }}</div>
 </div>
 <!-- Custom Messages -->

@@ -1,25 +1,65 @@
 var User = require('../models/user.js');
+var jwt = require('jsonwebtoken');
+var secret = "harrypotter"
 
 module.exports = function(router) {
-	router.post('/users', function(req, res) {
+router.post('/register', function(req, res) {
 		var user = new User();
 		user.userName = req.body.userName;
 		user.password = req.body.password;
 		user.email = req.body.email;
 		// Check if request is valid and not empty or null
-        if (req.body.userName === null || req.body.userName === '' || req.body.password === null || req.body.password === '' || req.body.email === null || req.body.email === '' || req.body.name === null || req.body.name === '') {
-            res.json({ success: false, message: 'Ensure username, email, and password were provided' });
-        } else {
-			// save the user
-			user.save(function(err) {
-	  			if (err) {
-	  				res.json({success:false,message:"Already exists"})
-	  			} else {
-	  				res.json({success:true,message:"User saved"});
-	  			}
-	  		})
-	  	};
+    if (!req.body.userName || !req.body.password || !req.body.email) {
+        res.json({ success: false, message: 'Ensure username, email, and password were provided' });
+    } else {
+			  // save the user
+				user.save(function(err) {
+		  		if (err) {
+		  			res.json({success:false,message:"Already exists"})
+		  		} else {
+		  			res.json({success:true,message:"User saved"});
+		  		}
+	  	  })
+	  };
 	});
+
+router.post('/login', function(req, res) {
+	// find each person with the user name
+	// selecting the `name` and `occupation` fields
+	// execute the query at a later time
+	console.log(req)
+	User.findOne({ $or: [
+		{userName: req.body.userName},
+		{email: req.body.userName}]
+	}).select('email userName password')
+	.exec(function(err,user) {
+		if(err) throw err;
+		if (!user) {
+			res.json({success: false, message: 'Could not authenticate the user'});
+		} else if (user) {
+			if(req.body.password) {
+				var validPassword = user.comparePassword(req.body.password);
+			} else {
+				res.json({success: false, message: 'No password provided'});
+			}
+			if (!validPassword) {
+				res.json({success: false, message:'Could not authenticate the password'});
+			} else {
+				var token = jwt.sign({userName: user.userName, email: user.email}, secret, {expiresIn : '24h'});
+				res.json({success: true, message:'User authenticated', token: token});
+			}
+		}
+	});
+
+});
+
+router.post('/logout', function() {
+	console.log("log out")
+})
 
 	return router;
 }
+
+jwt.sign({
+  data: 'foobar'
+}, 'secret', { expiresIn: '1h' });
