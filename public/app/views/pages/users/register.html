@@ -1,0 +1,31 @@
+<div class="pageHeader"> Register Page </div>
+<form ng-submit="registerUser()">
+	<!--email -->
+	<label>Email: </label>
+	<input type="text" class="form-control" name="email" placeholder="Please enter email" ng-model="user.email">
+	<br>
+	<!--user name -->
+	<label>User Name: </label>
+	<input type="text" name="userName" class="form-control" placeholder="Please enter user name" ng-model="user.userName">
+	<br>
+	<!--password -->
+	<label>Password: </label>
+	<input type="text" name="password" class="form-control" placeholder="Please enter password" ng-model="password">
+	<br>
+	<button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+
+<!-- Loading Icon (Bootstrap) -->
+<div class="jumbotron text-center" ng-show="true">
+{{loading}}
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+<!-- Loading Icon (Bootstrap) -->
+
+<!-- Custom Messages -->
+<div class="row show-hide-message" ng-show="{{successMessage|| errorMessage}}">
+    <div ng-class="alert">{{ successMsg || errorMsg }}</div>
+</div>
+<!-- Custom Messages -->

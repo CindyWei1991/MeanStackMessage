@@ -1,0 +1,27 @@
+{
+  "name": "meanstackmessage",
+  "version": "1.0.0",
+  "description": "Communication tool",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CindyWei1991/MeanStackMessage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CindyWei1991/MeanStackMessage/issues"
+  },
+  "homepage": "https://github.com/CindyWei1991/MeanStackMessage#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.5",
+    "morgan": "^1.8.2"
+  }
+}
