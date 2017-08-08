@@ -2,6 +2,7 @@ var User = require('../models/user.js');
 var jwt = require('jsonwebtoken');
 var secret = "harrypotter"
 
+
 module.exports = function(router) {
 router.post('/register', function(req, res) {
 		var user = new User();
@@ -21,13 +22,12 @@ router.post('/register', function(req, res) {
 		  		}
 	  	  })
 	  };
-	});
+});
 
 router.post('/login', function(req, res) {
 	// find each person with the user name
-	// selecting the `name` and `occupation` fields
+	// selecting the `name` and `password` fields
 	// execute the query at a later time
-	console.log(req)
 	User.findOne({ $or: [
 		{userName: req.body.userName},
 		{email: req.body.userName}]
@@ -45,17 +45,34 @@ router.post('/login', function(req, res) {
 			if (!validPassword) {
 				res.json({success: false, message:'Could not authenticate the password'});
 			} else {
-				var token = jwt.sign({userName: user.userName, email: user.email}, secret, {expiresIn : '24h'});
-				res.json({success: true, message:'User authenticated', token: token});
+				req.session.user = user
+				//var token = jwt.sign({userName: user.userName, email: user.email}, secret, {expiresIn : '24h'});
+				res.json({success: true, message:'User authenticated'});
 			}
 		}
 	});
 
 });
 
-router.post('/logout', function() {
-	console.log("log out")
-})
+router.get('/user', function(req, res) {
+	if (req.session.user) {
+		res.json({success: true, user: req.session.user});
+	} else {
+		res.json({success: false});
+  } 
+});
+	
+
+router.get('/logout', function(req, res) {
+	req.session.destroy(function(err) {
+		if (err) {
+			res.json({success: false, message: err});
+		} else {
+			res.json({success: true, message: "Logging out successfully"});
+		}
+
+	})
+});
 
 	return router;
 }

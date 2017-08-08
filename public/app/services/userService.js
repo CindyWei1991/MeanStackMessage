@@ -9,14 +9,16 @@ angular.module('userService', [])
 	_userService.loginUser = function(body) {
 		return $http.post('/api/login', body)
 	};
+
+	_userService.getUser = function() {
+		return $http.get('/api/user')
+	};
+
+	_userService.logoutUser = function() {
+		return $http.get('/api/logout')
+	};
+
+
 	return _userService;
 })
 
-.factory('tokenFactory', function() {
-	var _tokenService = {};
-	_tokenService.setToken = function(token) {
-		$windoww.localStorage.setItem()
-	}
-  return _tokenService;
-
-});
