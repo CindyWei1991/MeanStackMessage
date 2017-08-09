@@ -7,18 +7,21 @@ var secret = 'harrypotter'; // Create custom secret to use with JWT
 
 var User = require('../models/user');
 module.exports = function(app, passport) {
+	app.use(passport.initialize());
+	app.use(passport.session());
+  	
+  //passport will serilize/deserilize user instance from and to session 
+  	passport.serializeUser(function(user, done) {
+  		done(null, user.userName);
+  	});
+
+	passport.deserializeUser(function(name, done) {
+  		User.findOne({name: name}, function(err, user) {
+    		done(err, user);
+  		});
+	});
+
   
-
-
-  passport.serializeUser(function(user, done) {
-  	done(null, user.id);
-	});
-
-	passport.deserializeUser(function(id, done) {
-	  User.findById(id, function(err, user) {
-	    done(err, user);
-	  });
-	});
 // Use the GoogleStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and Google
@@ -26,7 +29,7 @@ module.exports = function(app, passport) {
 	passport.use(new GoogleStrategy({
 	    clientID: '989539758135-d1imma1qqkv5la5b15nr4d2pphkcthjj.apps.googleusercontent.com',
 	    clientSecret: 'u8UuADHY6TKC-WXjQPZrRojk',
-	    callbackURL: "http://www.example.com/auth/google/callback"
+	    callbackURL: "http://localhost:8080"
 	  },
 	  function(accessToken, refreshToken, profile, done) {
             User.findOne({ email: profile.emails[0].value }).select('username active password email').exec(function(err, user) {
@@ -55,7 +58,7 @@ module.exports = function(app, passport) {
 	//   login page.  Otherwise, the primary route function function will be called,
 	//   which, in this example, will redirect the user to the home page.
 	app.get('/auth/google/callback', 
-	  passport.authenticate('google', { failureRedirect: '/login' }),
+	  passport.authenticate('google', { failureRedirect: '/login', failureFlash: true  }),
 	  function(req, res) {
 	    res.redirect('/');
 	});

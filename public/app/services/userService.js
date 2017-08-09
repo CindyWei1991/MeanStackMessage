@@ -18,7 +18,7 @@ angular.module('userService', [])
 		return $http.get('/api/logout')
 	};
 
-
+   
 	return _userService;
 })
 

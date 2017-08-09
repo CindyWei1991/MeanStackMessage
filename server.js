@@ -10,7 +10,7 @@ var path = require('path');//built in, no need to run npm install
 var session = require('express-session');
 var MongoDBStore = require('connect-mongodb-session')(session);
 var passport = require('passport');
-var social = require('./app/passport/passport')(app, passport)
+
 
 //middleware
 app.use(morgan('dev'));
@@ -47,7 +47,7 @@ app.use(session({
 //so that we can use the session in router
 var appRoutes = require('./app/routes/api')(router);
 app.use('/api',appRoutes);
-
+var social = require('./app/passport/passport')(app, passport);
 
 app.get('*', function(req, res) {
 	res.sendFile(path.join(__dirname + "/public/app/views/index.html"));
