@@ -1,5 +1,5 @@
 angular.module('mainController',[])
-.controller ('mainCtrl', function($location, $scope, $timeout, userFactory) {
+.controller ('mainCtrl', function($location, $scope, $timeout, userFactory, $window) {
 	$scope.logout = function() {
 		 $location.path('/logout');
 		 userFactory.logoutUser().then(function(data) {
@@ -15,6 +15,9 @@ angular.module('mainController',[])
 		 })
 		 
 	};
+	$scope.google = function() {
+		$window.location = $window.location.protocol + "//" + $window.location.host + '/auth/google'
+	}
 	$scope.user = {};
 	userFactory.getUser().then(function(data) {
 		if (data.data.success) {

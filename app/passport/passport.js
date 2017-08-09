@@ -29,18 +29,22 @@ module.exports = function(app, passport) {
 	passport.use(new GoogleStrategy({
 	    clientID: '989539758135-d1imma1qqkv5la5b15nr4d2pphkcthjj.apps.googleusercontent.com',
 	    clientSecret: 'u8UuADHY6TKC-WXjQPZrRojk',
-	    callbackURL: "http://localhost:8080"
+	    callbackURL: "http://localhost:8080/auth/google/callback",
+	    profileFields: ['id', 'displayName', 'photos', 'email']
 	  },
 	  function(accessToken, refreshToken, profile, done) {
-            User.findOne({ email: profile.emails[0].value }).select('username active password email').exec(function(err, user) {
-                if (err) done(err);
+	  	console.log(profile);
+            // User.findOne({ email: profile.emails[0].value }).select('username active password email').exec(function(err, user) {
+            //     if (err) done(err);
 
-                if (user) {
-                    done(null, user);
-                } else {
-                    done(err);
-                }
-            });
+            //     if (user) {
+            //         done(null, user);
+            //     } else {
+            //         done(err);
+            //     }
+            // });
+
+       done(null,profile);
     }
 	));
 
