@@ -1,6 +1,6 @@
 var User = require('../models/user.js');
-var jwt = require('jsonwebtoken');
-var secret = "harrypotter"
+//var jwt = require('jsonwebtoken');
+//var secret = "harrypotter"
 
 
 module.exports = function(router) {
@@ -74,9 +74,6 @@ router.get('/logout', function(req, res) {
 	})
 });
 
-	return router;
+  return router;
 }
 
-jwt.sign({
-  data: 'foobar'
-}, 'secret', { expiresIn: '1h' });
