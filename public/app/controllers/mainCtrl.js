@@ -28,6 +28,4 @@ angular.module('mainController',[])
 			$rootScope.userLoggedIn = false;
 		}
 	});
-	
-	
 });
