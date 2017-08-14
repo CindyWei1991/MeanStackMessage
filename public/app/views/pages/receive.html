@@ -1,0 +1,108 @@
+
+
+	<div class="panel">
+		<div class="headerContainer">
+			<div class="headerContent row">
+				<div class="col" >
+					<a href="#send"><img src="media/imgs/flashbulblogogold1.png" class="header-img left"></a>
+				</div>
+				<!-- use filter -->
+				<input type="text" placeholder="Search" class="searchBar col-7" ng-model="searchText">
+				<div class="col">
+					<img src="media/imgs/avata-woman.png" class="header-img circle right">
+				</div>
+			</div>
+		</div>
+		<div class="navbar-iconGroup container">
+			
+			<table class="table-center">
+				<tr>
+					<th>
+						<!-- these icons are clickable, will filter the messages according to the category -->
+						<div class="icon fire circle" ng-click="getMessages('fire')" ng-class="{'active':getActive('fire')}">
+							<img src="media/imgs/fire.png" class="icon-img">
+						</div>
+						<div class="fire-message">
+							Firedrill</br>
+							4
+						</div>
+					</th>
+					<th>
+						<div class="icon blocker circle" ng-click="getMessages('blocker')" ng-class="{'active':getActive('blocker')}">
+							<img src="media/imgs/blocker.png" class="icon-img">
+						</div>
+						<div class="blocker-message">
+							Blocker</br>
+							3
+						</div>
+					</th>
+					<th>
+						<div class="icon goodNews circle" ng-click="getMessages('goodNews')" ng-class="{'active':getActive('goodNews')}">
+							<img src="media/imgs/goodnews.png" class="icon-img">
+						</div>
+						<div class="good-message">
+							Good News</br>
+							5
+						</div>
+					</th>
+					<th>
+						<div class="icon info circle" ng-click="getMessages('info')" ng-class="{'active':getActive('info')}">
+							<img src="media/imgs/info.png" class="icon-img">
+						</div>
+						<div class="info-message">
+							FYI</br>
+							0
+						</div>
+					</th>
+				</tr>
+			</table>
+			
+		</div>
+		<div class="seperator">
+		  Most Recent
+		</div>
+	
+		<div class="bodyContainer">
+
+			<table class="message-table">
+			<!--order by category first and then time -->
+				<tr ng-repeat-start="message in messages | customOrder:'category' | customOrder:'time' | filter: searchText | filter: filterCategory">
+					<td>
+					<div class="icon circle small" ng-class="message.category">
+						<img ng-src="{{getCategoryImg(message.category)}}" class="icon-img small">
+					</div>
+					</td>
+					<td style="width: 40px">
+						<img ng-src="{{message.sender.avartar}}" class="icon small">
+					</td>
+					<td>
+						{{message.sender.name}}
+					</td>
+					<td style="text-align: right;">
+						{{message.time| date:'yyyy-MM-dd'}}
+					</td>
+				</tr>
+				<tr>
+						<td></td>
+						<td colspan="4" style="padding-left:0.4em">{{message.content}}</td>
+				</tr>
+				<tr ng-repeat-end="">
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td style="text-align: right;">
+						<img src="media/imgs/share.png" class="xsmall">
+					
+						<img src="media/imgs/edit.png" class="xsmall">
+					
+						<img src="media/imgs/reply.png" class="xsmall">
+					</td>
+				</tr>
+			</table>
+
+		</div>
+
+	</div>

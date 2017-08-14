@@ -1,1 +1,56 @@
-hello send
+
+
+	<div class="panel" ng-controller="flashbulbCtrl">
+  <div class="headerContainer">
+		<div class="headerContent" >
+			<!-- click the button, go to the profile page-->
+			<!-- $window.location.href = 'http://www.google.com'-->
+			<img src="media/imgs/avata-woman.png" class="header-img left circle">
+			<a href="#/"><span class="header-text right white"> Cancel</span></a>
+		</div>
+	</div>
+	<div class="bodyContainer">
+	<div class="navbar-iconGroup">
+			<h4>Please choose a category:</h4>
+			<table class="table-center">
+			<tr>
+				<th>
+				<!--all the four icons are clickable, choose a type of the message
+				ng-click="setCategory('fire')"" -->
+					<div class="icon fire circle" ng-click="setCategory('fire')" ng-class="{'active': isActiveForSend('fire')}">
+						<img src="media/imgs/fire.png" class="icon-img">
+					</div>
+					<div class="fire-message">Firedrill</div>
+				</th>
+				<th>
+					<div class="icon blocker circle" ng-click="setCategory('blocker')" ng-class="{'active': isActiveForSend('blocker')}">
+						<img src="media/imgs/blocker.png" class="icon-img"">
+					</div>
+					<div class="blocker-message">Blocker</div>
+				</th>
+				<th>
+					<div class="icon goodNews circle" ng-click="setCategory('goodNews')" ng-class="{'active': isActiveForSend('goodNews')}"> 
+						<img src="media/imgs/goodnews.png" class="icon-img">
+					</div>
+					<div class="good-message">Good News</div>
+				</th>
+				<th>
+					<div class="icon info circle" ng-click="setCategory('info')" ng-class="{'active': isActiveForSend('info')}">
+						<img src="media/imgs/info.png" class="icon-img"">
+					</div>
+					<div class="info-message">FYI</div>
+				</th>
+			</tr>
+		</table>
+	</div>
+
+	
+		<textarea rows="10"  placeholder="{{placeholderMessage}}" id="inputbox" maxlength="230" ng-model="sendingMessage.content"></textarea>
+		<p class="text right"> {{230-sendingMessage.content.length}} characters left</p>
+		<!-- use ng-model to bind the data -->
+		<textarea rows="5" placeholder="Send to..." id="sendbox" ng-model="sendingMessage.receiver"></textarea>
+	<!-- click the button, do the post to the api, with message.category, message.content, message.toUsers, message.sender -->
+	<button id="sendBtn" type="submit" ng-click="sendMessage()">Send</button>
+	</div>
+</div>
+</div>
