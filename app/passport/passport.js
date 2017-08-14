@@ -4,13 +4,13 @@ var User = require('../models/user'); // Import User Model
 var jwt = require('jsonwebtoken'); // Import JWT Package
 var secret = 'harrypotter'; // Create custom sec
 
-module.exports = function(app, passport,mongoose) {
+module.exports = function(app, passport) {
 	app.use(passport.initialize());
 	app.use(passport.session());
   	
   //passport will serilize/deserilize user instance from and to session 
-  	passport.serializeUser(function(user, done) {
-  		done(null, user._id);
+  passport.serializeUser(function(user, done) {
+  		done(null, user.id);
 	});
 
 	passport.deserializeUser(function(id, done) {
@@ -30,6 +30,7 @@ module.exports = function(app, passport,mongoose) {
 	    callbackURL: "http://localhost:8080/auth/google/callback",
 	  },
 	  function(accessToken, refreshToken, profile, done) {
+
         User.findOne({'google.id': profile.id}, function (err, user) {
         	if(err) return done(err);
 
@@ -48,8 +49,6 @@ module.exports = function(app, passport,mongoose) {
             	});
         	}
     	});
-
-       
     }
 	));
 
@@ -68,8 +67,10 @@ module.exports = function(app, passport,mongoose) {
 	//   login page.  Otherwise, the primary route function function will be called,
 	//   which, in this example, will redirect the user to the home page.
 	app.get('/auth/google/callback', 
+
 	  passport.authenticate('google', { failureRedirect: '/login', failureFlash: true  }),
 	  function(req, res) {
+	  	console.log("callback")
 	  	console.log(req.session.passport.user)
 	    res.redirect('/');
 	});
