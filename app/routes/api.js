@@ -16,7 +16,11 @@ router.post('/register', function(req, res) {
 			  // save the user
 				user.save(function(err) {
 		  		if (err) {
-		  			res.json({success:false,message:"Already exists"})
+					  if (err.errors.email) {
+						res.json({success:false,message:err.errors.email.message})
+					  } else {
+						res.json({success:false,message:err.errors})
+					  }
 		  		} else {
 		  			res.json({success:true,message:"User saved"});
 		  		}

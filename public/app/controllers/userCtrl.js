@@ -30,7 +30,7 @@ angular.module('userControllers', [])
 				$scope.warning.loading = false;
 				$scope.warning.successMessage = data.data.message + "Redirecting";
 				$timeout(function() {
-					$location.path('/');
+					$location.path('/profile');
 				}, 2000);
 			} else {
 				$scope.warning.loading = false;

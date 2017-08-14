@@ -30,7 +30,6 @@ module.exports = function(app, passport) {
 	    callbackURL: "http://localhost:8080/auth/google/callback",
 	  },
 	  function(accessToken, refreshToken, profile, done) {
-
         User.findOne({'google.id': profile.id}, function (err, user) {
         	if(err) return done(err);
 
@@ -67,11 +66,8 @@ module.exports = function(app, passport) {
 	//   login page.  Otherwise, the primary route function function will be called,
 	//   which, in this example, will redirect the user to the home page.
 	app.get('/auth/google/callback', 
-
 	  passport.authenticate('google', { failureRedirect: '/login', failureFlash: true  }),
 	  function(req, res) {
-	  	console.log("callback")
-	  	console.log(req.session.passport.user)
 	    res.redirect('/');
 	});
 	return passport;

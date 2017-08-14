@@ -1,4 +1,4 @@
-angular.module('appRoutes', ['ngRoute'])
+var app = angular.module('appRoutes', ['ngRoute'])
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/', {
@@ -9,17 +9,25 @@ angular.module('appRoutes', ['ngRoute'])
 	})
 	.when('/register', {
 		templateUrl: 'app/views/pages/users/register.html',
-		controller: 'registerController'
+		controller: 'registerController',
+		authenticated: false
 	})
 	.when('/login', {
 		templateUrl: 'app/views/pages/users/login.html',
-		controller: 'loginController'
+		controller: 'loginController',
+		authenticated: false
 	})
 	.when('/logout', {
 		templateUrl: 'app/views/pages/users/logout.html',
+		authenticated: true
 	})
 	.when('/auth/google', {
-		templateUrl: 'app/views/pages/users/social.html'
+		templateUrl: 'app/views/pages/users/social.html',
+		authenticated: false
+	}).
+	when('/profile', {
+		templateUrl: 'app/views/pages/users/profile.html',
+		authenticated: true
 	})
 	.otherwise ({redirectTo: '/'});
 	
@@ -28,3 +36,29 @@ angular.module('appRoutes', ['ngRoute'])
 		requireBase: false
 	});
 });
+//restricting the routes
+//prevent the user going to unexpected urls
+app.run(['$rootScope', '$location','userFactory', function($rootScope, $location,userFactory) {
+	$rootScope.$on('$routeChangeStart', function(event, next, current) {
+		userFactory.getUser().then(function(data) {
+			var isLoggedIn = false;
+			if (data.data.success == true) {
+				isLoggedIn = true;
+			}
+			if (next.$$route.authenticated == true) {
+				if (!$rootScope.isLoggedIn) {
+					event.preventDefault();
+					$location.path('/');
+				}
+			} else if ((next.$$route.authenticated == false)){
+				if (isLoggedIn) {
+					event.preventDefault();
+					$location.path('/profile');
+				}
+			} else {
+	
+			}
+		});
+
+	})
+}]);
