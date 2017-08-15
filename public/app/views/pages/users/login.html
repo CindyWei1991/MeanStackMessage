@@ -1,32 +1,63 @@
-<div class="pageHeader"> Login Page </div>
-<form ng-submit="login()">
-	<!--email -->
-	<label>User name or Email: </label>
-	<input type="text" class="form-control" name="email" placeholder="Please enter email or user name" ng-model="user.userName">
-	<br>
-	<!--password -->
-	<label>Password: </label>
-	<input type="text" name="password" class="form-control" placeholder="Please enter password" ng-model="user.password" ng-attr-type="{{ showPassword ? 'text' : 'password' }}">
-	<br>
-	<label>Show Password:
-    <input type="checkbox" ng-model="showPassword"
-           ng-true-value= true ng-false-value= false>
-   </label><br/>
-	<button type="submit" class="btn btn-primary">Login</button>
-	<a href="/auth/google" class="btn btn-success" target="_blank">Sign In with Google</a>
-</form>
+<div class="userAuth container-fluid">
+	<div class="row main">
+		<div class="panel-heading">
+			<div class="panel-title text-center">
+				<h1 class="title">FlashBulb</h1>
+				<hr />
+			</div>
+		</div>
+		<!--<div class="panel-heading">Login</div>-->
+		<div class="main-login main-center" >
+			
+			<form ng-submit="login()" class="form-horizontal">
+				<!--email -->
+				<div class="form-group">
+					<label for="email" class="cols-sm-2 control-label">User name or Email</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+							<input type="text" class="form-control input-lg" name="email" placeholder="Please enter email or user name" ng-model="user.userName">
+						</div>
+					</div>
+				</div>
+				<!--password -->
+				<div class="form-group">
+					<label for="password" class="cols-sm-2 control-label">Password</label>
+					<div class="cols-sm-10">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+							<input type="text" name="password" class="form-control input-lg" placeholder="Please enter password" ng-model="user.password" ng-attr-type="{{ showPassword ? 'text' : 'password' }}">
+						</div>
+					</div>
+				</div>
+				<label>Show Password:
+				<input type="checkbox" ng-model="showPassword"
+					ng-true-value= true ng-false-value= false>
+				</label>
+				<br/>
+				<div class="form-group ">
+					<button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
+				</div>
+				<div class="form-group ">
+					<a href="/auth/google" class="btn btn-success btn-lg btn-block login-button" target="_blank" style="margin-top:1em">Sign In with Google</a>
+				</div>
+				<br><a href="/register" style="margin-top:1em">Register</a>
+			</form>
+		</div>
+	</div>
 
 
 
-<!-- Loading Icon (Bootstrap) -->
-<div class="jumbotron text-center" ng-show="warning.loading">
-    <span class="glyphicon glyphicon-repeat spinner"></span>
-    <p>Loading....</p>
+	<!-- Loading Icon (Bootstrap) -->
+	<div class="jumbotron text-center" ng-show="warning.loading">
+		<span class="glyphicon glyphicon-repeat spinner"></span>
+		<p>Loading....</p>
+	</div>
+	<!-- Loading Icon (Bootstrap) -->
+
+	<!-- Custom Messages -->
+	<div class="row" ng-show="warning.successMessage|| warning.errorMessage">
+		<div class="alert alert-danger">{{ warning.successMessage || warning.errorMessage }}</div>
+	</div>
+	<!-- Custom Messages -->
 </div>
-<!-- Loading Icon (Bootstrap) -->
-
-<!-- Custom Messages -->
-<div class="row" ng-show="warning.successMessage|| warning.errorMessage">
-    <div class="alert alert-danger">{{ warning.successMessage || warning.errorMessage }}</div>
-</div>
-<!-- Custom Messages -->

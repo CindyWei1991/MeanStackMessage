@@ -1,15 +1,34 @@
 
-
+<div class="userAuth container-fluid">
+	<div class="row main">
+		<div class="main-login main-center receive">
+			<div class="row receive-header">
+				<div class="col-xs-3 vcenter">
+					<img src="../../../assets/imgs/avata-woman.png" class="avatar img-circle">
+				</div>
+				
+				<input type="text" id="searchBar" placeholder="Search" ng-model="searchText" class="col-xs-5 vcenter">
+				
+				<div class="col-xs-3 vcenter">
+						<img src="../../../assets/imgs/flashbulblogogold1.png" class="avatar img-circle">
+				</div>
+			</div>
+			<div class="receive-body">
+				body
+			</div>
+		</div>
+	</div>
+</div>
 	<div class="panel">
 		<div class="headerContainer">
 			<div class="headerContent row">
-				<div class="col" >
-					<a href="#send"><img src="media/imgs/flashbulblogogold1.png" class="header-img left"></a>
+				<div class="col-" >
+					<a href="#send"><img src="../../../assets/imgs/flashbulblogogold1.png" class="header-img left"></a>
 				</div>
 				<!-- use filter -->
 				<input type="text" placeholder="Search" class="searchBar col-7" ng-model="searchText">
 				<div class="col">
-					<img src="media/imgs/avata-woman.png" class="header-img circle right">
+					<img src="../../../assets/imgs/avata-woman.png" class="header-img circle right">
 				</div>
 			</div>
 		</div>
@@ -20,7 +39,7 @@
 					<th>
 						<!-- these icons are clickable, will filter the messages according to the category -->
 						<div class="icon fire circle" ng-click="getMessages('fire')" ng-class="{'active':getActive('fire')}">
-							<img src="media/imgs/fire.png" class="icon-img">
+							<img src="../../../assets/imgs/fire.png" class="icon-img">
 						</div>
 						<div class="fire-message">
 							Firedrill</br>
@@ -29,7 +48,7 @@
 					</th>
 					<th>
 						<div class="icon blocker circle" ng-click="getMessages('blocker')" ng-class="{'active':getActive('blocker')}">
-							<img src="media/imgs/blocker.png" class="icon-img">
+							<img src="../../../assets/imgs/blocker.png" class="icon-img">
 						</div>
 						<div class="blocker-message">
 							Blocker</br>
@@ -38,7 +57,7 @@
 					</th>
 					<th>
 						<div class="icon goodNews circle" ng-click="getMessages('goodNews')" ng-class="{'active':getActive('goodNews')}">
-							<img src="media/imgs/goodnews.png" class="icon-img">
+							<img src="../../../assets/imgs/goodnews.png" class="icon-img">
 						</div>
 						<div class="good-message">
 							Good News</br>
@@ -47,7 +66,7 @@
 					</th>
 					<th>
 						<div class="icon info circle" ng-click="getMessages('info')" ng-class="{'active':getActive('info')}">
-							<img src="media/imgs/info.png" class="icon-img">
+							<img src="../../../assets/imgs/info.png" class="icon-img">
 						</div>
 						<div class="info-message">
 							FYI</br>
@@ -94,11 +113,11 @@
 					<td>
 					</td>
 					<td style="text-align: right;">
-						<img src="media/imgs/share.png" class="xsmall">
+						<img src="../../../assets/imgs/share.png" class="xsmall">
 					
-						<img src="media/imgs/edit.png" class="xsmall">
+						<img src="../../../assets/imgs/edit.png" class="xsmall">
 					
-						<img src="media/imgs/reply.png" class="xsmall">
+						<img src="../../../assets/imgs/reply.png" class="xsmall">
 					</td>
 				</tr>
 			</table>
@@ -106,3 +125,4 @@
 		</div>
 
 	</div>
+</div>

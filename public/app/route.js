@@ -4,9 +4,7 @@ var app = angular.module('appRoutes', ['ngRoute'])
 	.when('/', {
 		templateUrl: 'app/views/pages/home.html'
 	})
-	.when('/send', {
-		templateUrl: 'app/views/pages/send.html'
-	})
+	
 	.when('/register', {
 		templateUrl: 'app/views/pages/users/register.html',
 		controller: 'registerController',
@@ -24,9 +22,19 @@ var app = angular.module('appRoutes', ['ngRoute'])
 	.when('/auth/google', {
 		templateUrl: 'app/views/pages/users/social.html',
 		authenticated: false
-	}).
-	when('/profile', {
+	})
+	.when('/profile', {
 		templateUrl: 'app/views/pages/users/profile.html',
+		authenticated: true
+	})
+	.when('/receive', {
+		templateUrl: 'app/views/pages/receive.html',
+		controller: 'flashbulbCtrl',
+		authenticated: true
+	})
+	.when('/send', {
+		templateUrl: 'app/views/pages/send.html',
+		controller: 'flashbulbCtrl',
 		authenticated: true
 	})
 	.otherwise ({redirectTo: '/'});
@@ -46,7 +54,8 @@ app.run(['$rootScope', '$location','userFactory', function($rootScope, $location
 				isLoggedIn = true;
 			}
 			if (next.$$route.authenticated == true) {
-				if (!$rootScope.isLoggedIn) {
+				console.log(isLoggedIn)
+				if (!isLoggedIn) {
 					event.preventDefault();
 					$location.path('/');
 				}
