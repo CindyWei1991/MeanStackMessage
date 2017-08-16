@@ -47,6 +47,7 @@ body,html {
 
 .main-center.receive {
     padding: 0;
+    width: 550px;
 }
 
 .vcenter {
@@ -58,4 +59,58 @@ body,html {
 
 .receive-body {
     height: 100%
+}
+.receive-body.row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
+}
+.right {
+    float: right;
+}
+
+@media screen and (max-width: 981px) {
+    .main-center.receive{
+        width: 100%;
+        margin:0;
+    }
+    .main.receive {
+        margin-top: 0;
+    }
+ 
+}
+
+.category-icon {
+    width:60px;
+    height: 60px
+}
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+    text-align: center;
+}
+
+.receive-body .col-centered img.active {
+    width: 70px;
+    height: 70px;
+}
+
+
+.receive-body .col-centered img:hover {
+    width: 70px;
+    height: 70px;
+}
+
+.panel-footer i{
+    font-size: 24px;
+    color:grey;
 }

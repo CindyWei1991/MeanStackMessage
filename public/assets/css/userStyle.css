@@ -11,21 +11,6 @@
     position: relative;
 }
 
-.userAuth .panel {
-    width:40%;
-    height: 80%;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-}
-
-.userAuth .panel-body {
-    padding: 2em
-}
-
-
-
 .main{
     margin-top: 20px;
 }
@@ -82,7 +67,7 @@ input::-webkit-input-placeholder {
 
 @media screen and (max-width: 981px) {
     .main-center{
-        width: 90%
+        width: 90%;
     }
-    
+ 
 }

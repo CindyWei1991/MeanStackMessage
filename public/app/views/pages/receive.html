@@ -1,85 +1,82 @@
 
 <div class="userAuth container-fluid">
-	<div class="row main">
+	<div class="row main receive">
 		<div class="main-login main-center receive">
-			<div class="row receive-header">
+			<div class="receive-header">
 				<div class="col-xs-3 vcenter">
 					<img src="../../../assets/imgs/avata-woman.png" class="avatar img-circle">
 				</div>
 				
 				<input type="text" id="searchBar" placeholder="Search" ng-model="searchText" class="col-xs-5 vcenter">
 				
-				<div class="col-xs-3 vcenter">
+				<div class="col-xs-3 vcenter right" >
 						<img src="../../../assets/imgs/flashbulblogogold1.png" class="avatar img-circle">
 				</div>
 			</div>
-			<div class="receive-body">
-				body
+			<div class="container-fluid">
+				<div class="receive-body row row-centered">
+					<div class="col-xs-3 col-centered" ng-click="getMessages('fire')">
+						<img src="../../../assets/imgs/fire.png" class="category-icon" ng-class="{'active':getActive('fire')}">
+						<h4>Firedrill</h4>
+						<h4>3</h4>
+					</div>
+					<div class="col-xs-3 col-centered" ng-click="getMessages('blocker')">
+						<img src="../../../assets/imgs/cone.png" class="category-icon" ng-class="{'active':getActive('blocker')}">
+						<h4>Blocker</h4>
+						<h4>3</h4>
+					</div>
+					<div class="col-xs-3 col-centered" ng-click="getMessages('goodNews')">
+						<img src="../../../assets/imgs/goodNews.png" class="category-icon" ng-class="{'active':getActive('goodNews')}">
+						<h4>GoodNews</h4>
+						<h4>3</h4>
+					</div>
+					<div class="col-xs-3 col-centered" ng-click="getMessages('info')">
+						<img src="../../../assets/imgs/info.png" class="category-icon" ng-class="{'active':getActive('info')}">
+						<h4>Info</h4>
+						<h4>3</h4>
+					</div>
+				</div>
 			</div>
+			<!-- <div class="well well-sm">Most Recent</div> -->
+			<div class="container-fluid">
+				<div class="panel panel-info"> 
+					<div class="panel-heading">Most Recent</div>
+					<div class="panel-body">
+						Panel Content
+					</div>
+					<div class="panel-footer">
+						<i class="fa fa-share-alt pull-right"></i>
+						<i class="fa fa-send pull-right"></i>
+						<i class="fa fa-remove"></i>
+					</div>
+				</div>
+				<div class="panel panel-danger"> 
+					<div class="panel-heading">Most Recent</div>
+					<div class="panel-body">
+						Panel Content
+					</div>
+					<div class="panel-footer">Panel Footer</div>
+				</div>
+				<div class="panel panel-danger"> 
+					<div class="panel-heading">Most Recent</div>
+					<div class="panel-body">
+						Panel Content
+					</div>
+					<div class="panel-footer">Panel Footer</div>
+				</div>
+				<div class="panel panel-danger"> 
+					<div class="panel-heading">Most Recent</div>
+					<div class="panel-body">
+						Panel Content
+					</div>
+					<div class="panel-footer">Panel Footer</div>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 </div>
-	<div class="panel">
-		<div class="headerContainer">
-			<div class="headerContent row">
-				<div class="col-" >
-					<a href="#send"><img src="../../../assets/imgs/flashbulblogogold1.png" class="header-img left"></a>
-				</div>
-				<!-- use filter -->
-				<input type="text" placeholder="Search" class="searchBar col-7" ng-model="searchText">
-				<div class="col">
-					<img src="../../../assets/imgs/avata-woman.png" class="header-img circle right">
-				</div>
-			</div>
-		</div>
-		<div class="navbar-iconGroup container">
-			
-			<table class="table-center">
-				<tr>
-					<th>
-						<!-- these icons are clickable, will filter the messages according to the category -->
-						<div class="icon fire circle" ng-click="getMessages('fire')" ng-class="{'active':getActive('fire')}">
-							<img src="../../../assets/imgs/fire.png" class="icon-img">
-						</div>
-						<div class="fire-message">
-							Firedrill</br>
-							4
-						</div>
-					</th>
-					<th>
-						<div class="icon blocker circle" ng-click="getMessages('blocker')" ng-class="{'active':getActive('blocker')}">
-							<img src="../../../assets/imgs/blocker.png" class="icon-img">
-						</div>
-						<div class="blocker-message">
-							Blocker</br>
-							3
-						</div>
-					</th>
-					<th>
-						<div class="icon goodNews circle" ng-click="getMessages('goodNews')" ng-class="{'active':getActive('goodNews')}">
-							<img src="../../../assets/imgs/goodnews.png" class="icon-img">
-						</div>
-						<div class="good-message">
-							Good News</br>
-							5
-						</div>
-					</th>
-					<th>
-						<div class="icon info circle" ng-click="getMessages('info')" ng-class="{'active':getActive('info')}">
-							<img src="../../../assets/imgs/info.png" class="icon-img">
-						</div>
-						<div class="info-message">
-							FYI</br>
-							0
-						</div>
-					</th>
-				</tr>
-			</table>
-			
-		</div>
-		<div class="seperator">
-		  Most Recent
-		</div>
+
 	
 		<div class="bodyContainer">
 
