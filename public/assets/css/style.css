@@ -111,6 +111,10 @@ body,html {
 }
 
 .panel-footer i{
-    font-size: 24px;
-    color:grey;
+    font-size: 20px;
+    color:#8B8989;
+
+}
+.panel-footer {
+    min-height: 35px;
 }

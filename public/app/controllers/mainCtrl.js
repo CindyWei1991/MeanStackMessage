@@ -96,7 +96,7 @@ angular.module('mainController',[])
 		console.log($scope.sendingMessage);
 		$http
 		({method: 'POST',
-   			url: '/send/sendMessage',
+   			url: '/api/send/sendMessage',
     		data: $scope.sendingMessage
     	})
 		.then(function(res) {

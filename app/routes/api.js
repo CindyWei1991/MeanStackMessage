@@ -1,7 +1,7 @@
 var User = require('../models/user.js');
 //var jwt = require('jsonwebtoken');
 //var secret = "harrypotter"
-
+var Message = require('../models/message.js')
 
 module.exports = function(router) {
 router.post('/register', function(req, res) {
@@ -77,6 +77,32 @@ router.get('/logout', function(req, res) {
 
 	})
 });
+
+router.post('/send/sendMessage', function(req, res) {
+	console.log(req.body);
+	var message = new Message();
+	message.text = req.body.text;
+	message.category = req.body.category;
+	message.sendor = req.body.sendor;
+	message.receiver = req.body.receiver;
+	// Check if request is valid and not empty or null
+	if (!req.body.text || !req.body.category || !req.body.sendor || !req.body.receiver) {
+			res.json({ success: false, message: 'Ensure all required fields are provided' });
+	} else {
+			// save the user
+			user.save(function(err) {
+				if (err) {
+					if (err.errors.email) {
+					res.json({success:false,message:err.errors.email.message})
+					} else {
+					res.json({success:false,message:err.errors})
+					}
+				} else {
+					res.json({success:true,message:"User saved"});
+				}
+			})
+	};
+})
 
   return router;
 }

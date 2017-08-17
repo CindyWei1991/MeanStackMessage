@@ -68,6 +68,5 @@ app.run(['$rootScope', '$location','userFactory', function($rootScope, $location
 	
 			}
 		});
-
 	})
 }]);
