@@ -62,7 +62,7 @@ app.run(['$rootScope', '$location','userFactory', function($rootScope, $location
 			} else if ((next.$$route.authenticated == false)){
 				if (isLoggedIn) {
 					event.preventDefault();
-					$location.path('/profile');
+					$location.path('/receive');
 				}
 			} else {
 	

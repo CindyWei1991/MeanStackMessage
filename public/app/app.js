@@ -1,5 +1,5 @@
 //main app configuration
-var flashApp = angular.module('flashbulbApp',['appRoutes','userControllers','userService','ngAnimate','mainController'])
+var flashApp = angular.module('flashbulbApp',['appRoutes','userControllers','userService','ngAnimate','ngMaterial', 'mainController', 'mainService'])
 flashApp.config(function() {
 
 

@@ -23,6 +23,7 @@ angular.module('mainController',[])
 		if (data.data.success) {
 			$rootScope.userLoggedIn = true;
 			$scope.user.userName = data.data.user.userName;
+			$rootScope.user = data.data.user;
 		} else {
 			$scope.user.userName = "";
 			$rootScope.userLoggedIn = false;
@@ -32,10 +33,62 @@ angular.module('mainController',[])
 
 
 
-.controller("flashbulbCtrl",function($scope, $http) {
-	$http.get('/messages').then(function(data) {
-		$scope.messages = data.data.message;
+.controller("flashbulbCtrl",function($scope, $http, $rootScope, mainFactory, $mdSidenav) {
+	$scope.sendingMessage = {};
+	$scope.sendingMessage.sendor = $rootScope.user;
+	$scope.sendingMessage.receiver = {};
+	mainFactory.getMessages().then(function(data) {
+		if (data.data.success) {
+			$scope.messages = data.data.message;
+			console.log(data);
+		} else {
+			console.log("no message")
+		}
 	});
+	//get the count of each category's messages
+	mainFactory.getMessageCount("fire").then(function(data) {
+		if (data.data.success) {
+			$scope.fireCount = data.data.count;
+		} else {
+			console.log("no message")
+		}
+	});
+
+	mainFactory.getMessageCount("blocker").then(function(data) {
+		if (data.data.success) {
+			$scope.blockerCount = data.data.count;
+		} else {
+			console.log("no message")
+		}
+	});
+
+	mainFactory.getMessageCount("goodNews").then(function(data) {
+		if (data.data.success) {
+			$scope.goodNewsCount = data.data.count;
+		} else {
+			console.log("no message")
+		}
+	});
+
+	mainFactory.getMessageCount("info").then(function(data) {
+		if (data.data.success) {
+			$scope.infoCount = data.data.count;
+		} else {
+			console.log("no message")
+		}
+	});
+	$scope.getPanelClass = function(category) {
+		switch(category) {
+			case "fire":
+				return "panel-danger";
+			case "blocker":
+				return "panel-warning";
+			case "goodNews":
+				return "panel-success";
+			case "info":
+				return "panel-info";
+		}
+	}
 	$scope.getCategoryImg = function (category) {
 		switch(category) {
 			case "fire":
@@ -87,12 +140,11 @@ angular.module('mainController',[])
 		return category == $scope.selectedCategory
 	};
 	$scope.gotoIndex = function() {
-		location.replace("/index.html")
-	}
+		location.replace("/index.html");
+	};
 
 	$scope.sendMessage = function() {
-		$scope.sendingMessage.category = $scope.selectedCategory
-		$scope.sendingMessage.sender={"name":"Test Account","avartar": "media/imgs/avata-woman.png"}
+		$scope.sendingMessage.category = $scope.selectedCategory;
 		console.log($scope.sendingMessage);
 		$http
 		({method: 'POST',
@@ -100,9 +152,19 @@ angular.module('mainController',[])
     		data: $scope.sendingMessage
     	})
 		.then(function(res) {
-			location.replace("/")
+			location.replace("/");
 		}).then(function(error){
-			console.log(error)
+			console.log(error);
 		})
-	}
+	};
+	
+	  $scope.toggleLeft = function() {
+		  $mdSidenav("left")
+			.toggle();
+	  };
+	  
+	  $scope.close = function () {
+		$mdSidenav('left').close();
+	  };
+  
 })

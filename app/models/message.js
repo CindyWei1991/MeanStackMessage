@@ -10,17 +10,27 @@ var emailValidator = [
     message:'Must be a valid email address'
   })
 ];
+
+/*schema*/
 var ObjectId = mongoose.Schema.Types.ObjectId;
 //there is another way to validate email: simply validator:'isEmail', 'isLength'
 var MessageSchema = new Schema ({
   text: {type: String, required: true},
   category: {type: String, required: true},
-  receiver: {type:ObjectId, required: true},
-  sendor: {type: ObjectId, required: true},
+  receiver: {type:ObjectId, required: true, ref:'User'},
+  sendor: {type: ObjectId, required: true, ref: 'User'},
   dateTime: {type: Date, default: Date.now}
 });
 
+/**
+ * Add your
+ * - pre-save hooks
+ * - validations
+ * - virtuals
+ */
 
-
+ /**
+ * Methods
+ */
 module.exports = mongoose.model('Message', MessageSchema);
 
