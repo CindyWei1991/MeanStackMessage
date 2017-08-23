@@ -13,10 +13,11 @@ router.post('/register', function(req, res) {
     if (!req.body.userName || !req.body.password || !req.body.email) {
         res.json({ success: false, message: 'Ensure username, email, and password were provided' });
     } else {
+		console.log("saving user")
 			  // save the user
 				user.save(function(err) {
 		  		if (err) {
-					  if (err.errors.email) {
+					  if (err.errors && err.errors.email) {
 						res.json({success:false,message:err.errors.email.message})
 					  } else {
 						res.json({success:false,message:err.errors})
@@ -130,7 +131,6 @@ router.get('/messages', function(req, res) {
 		res.json({success: false, message:'authentication error'});
   } 
 });
->>>>>>> origin/master
 
 router.get('/messageCount/:category', function(req, res) {
 	console.log(req.params.category)
