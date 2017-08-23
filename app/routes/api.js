@@ -83,24 +83,67 @@ router.post('/send/sendMessage', function(req, res) {
 	var message = new Message();
 	message.text = req.body.text;
 	message.category = req.body.category;
+	message.sendor = req.body.sendor._id;
+	//to find the object id of the user
+	User.findOne({'email' : req.body.receiver.email}).exec(function(err, user) {
+		if (err) {
+			console.log(err);
+			res.json ({success:false,message:"Cannot find the email adress."})
+		} 
+		if(user) {
+			console.log(user._id);
+			message.receiver = user._id;
+			// Check if request is valid and not empty or null
+			if (!message.text || !message.category || !message.sendor || !message.receiver) {
+				console.log("err")
+					res.json({ success: false, message: 'Ensure all required fields are provided' });
+			} else {
+					// save the user
+					message.save(function(err) {
+						if (err) {
+							res.json({success:false,message:err.errors})
+							console.log(err)
+						} else {
+							console.log("message saved")
+							res.json({success:true,message:"Message saved"});
+						}
+					})
+			};
+		}
+	});
 	
-	message.sendorId = req.body.sendor;
-	message.receiverId = req.body.receiver;
-	// Check if request is valid and not empty or null
-	if (!req.body.text || !req.body.category || !req.body.sendor || !req.body.receiver) {
-			res.json({ success: false, message: 'Ensure all required fields are provided' });
-	} else {
-			// save the user
-			message.save(function(err) {
-				if (err) {
-					res.json({success:false,message:err.errors})
-				} else {
-					res.json({success:true,message:"User saved"});
-				}
-			})
-	};
-})
+});
 
+router.get('/messages', function(req, res) {
+	if (req.session.user) {
+		Message.find({'receiver': req.session.user._id})
+		.populate('sendor', 'userName')
+		.exec(function(err, message) {
+			if (err) {
+				res.json({success:false, message:'no message'});
+			}
+			if (message) {
+				res.json({success:true, message: message});
+			}
+		})
+	} else {
+		res.json({success: false, message:'authentication error'});
+  } 
+});
+>>>>>>> origin/master
+
+router.get('/messageCount/:category', function(req, res) {
+	console.log(req.params.category)
+		Message.find({'receiver': req.session.user._id, 'category': req.params.category})
+		.count(function(err, count) {
+			if (err) {
+				res.json({success: fasle, count: 0});
+			} else {
+				res.json({success: true, count: count})
+			}
+		})
+
+});
   return router;
 }
 

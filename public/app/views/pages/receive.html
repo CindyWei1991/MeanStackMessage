@@ -1,10 +1,22 @@
 
 <div class="userAuth container-fluid">
+	
 	<div class="row main receive">
 		<div class="main-login main-center receive">
+				<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" id="leftSideNav" md-disable-backdrop="true">
+						<md-toolbar class="md-theme-indigo" layout="row">
+						  <h1 class="md-toolbar-tools">Hello {{user.userName}}</h1>
+						  <span flex></span>
+						  <md-button ng-click="close()">Close</md-button>
+						</md-toolbar>
+						<md-content layout-padding="" layout="column" layout-align="start start">
+						  <md-button ng-click="show('home')" class="md-primary">Show Home</md-button>
+						  <md-button ng-click="show('work')" class="md-primary">Show Work</md-button>
+						</md-content>
+				</md-sidenav>
 			<div class="receive-header">
 				<div class="col-xs-3 vcenter">
-					<img src="../../../assets/imgs/avata-woman.png" class="avatar img-circle">
+						<img src="../../../assets/imgs/avata-woman.png" class="avatar img-circle" ng-click="toggleLeft()">
 				</div>
 				
 				<input type="text" id="searchBar" placeholder="Search" ng-model="searchText" class="col-xs-5 vcenter">
@@ -15,34 +27,34 @@
 			</div>
 			<div class="container-fluid">
 				<div class="receive-body row row-centered">
-					<div class="col-xs-3 col-centered" ng-click="getMessages('fire')">
+					<div class="col-xs-3 col-centered clickable" ng-click="getMessages('fire')">
 						<img src="../../../assets/imgs/fire.png" class="category-icon" ng-class="{'active':getActive('fire')}">
 						<h4>Firedrill</h4>
-						<h4>3</h4>
+						<h4>{{fireCount}}</h4>
 					</div>
-					<div class="col-xs-3 col-centered" ng-click="getMessages('blocker')">
+					<div class="col-xs-3 col-centered clickable" ng-click="getMessages('blocker')">
 						<img src="../../../assets/imgs/cone.png" class="category-icon" ng-class="{'active':getActive('blocker')}">
 						<h4>Blocker</h4>
-						<h4>3</h4>
+						<h4>{{blockerCount}}</h4>
 					</div>
-					<div class="col-xs-3 col-centered" ng-click="getMessages('goodNews')">
+					<div class="col-xs-3 col-centered clickable" ng-click="getMessages('goodNews')">
 						<img src="../../../assets/imgs/goodNews.png" class="category-icon" ng-class="{'active':getActive('goodNews')}">
 						<h4>GoodNews</h4>
-						<h4>3</h4>
+						<h4>{{goodNewsCount}}</h4>
 					</div>
-					<div class="col-xs-3 col-centered" ng-click="getMessages('info')">
+					<div class="col-xs-3 col-centered clickable" ng-click="getMessages('info')">
 						<img src="../../../assets/imgs/info.png" class="category-icon" ng-class="{'active':getActive('info')}">
 						<h4>Info</h4>
-						<h4>3</h4>
+						<h4>{{infoCount}}</h4>
 					</div>
 				</div>
 			</div>
 			<!-- <div class="well well-sm">Most Recent</div> -->
 			<div class="container-fluid">
-				<div class="panel panel-info"> 
-					<div class="panel-heading">Most Recent</div>
+				<div class="panel" ng-repeat="message in messages" ng-class="getPanelClass(message.category)"> 
+					<div class="panel-heading" ng-class="message.category">{{message.sendor.userName}}</div>
 					<div class="panel-body">
-						Panel Content
+						{{message.text}}
 					</div>
 					<div class="panel-footer">
 						<i class="fa fa-share-alt pull-right"></i>
@@ -50,76 +62,11 @@
 						<i class="fa fa-remove pull-right"></i>
 					</div>
 				</div>
-				<div class="panel panel-danger"> 
-					<div class="panel-heading">Most Recent</div>
-					<div class="panel-body">
-						Panel Content
-					</div>
-					<div class="panel-footer">Panel Footer</div>
-				</div>
-				<div class="panel panel-danger"> 
-					<div class="panel-heading">Most Recent</div>
-					<div class="panel-body">
-						Panel Content
-					</div>
-					<div class="panel-footer">Panel Footer</div>
-				</div>
-				<div class="panel panel-danger"> 
-					<div class="panel-heading">Most Recent</div>
-					<div class="panel-body">
-						Panel Content
-					</div>
-					<div class="panel-footer">Panel Footer</div>
-				</div>
 			</div>
 			
 		</div>
 	</div>
 </div>
 
+
 	
-		<div class="bodyContainer">
-
-			<table class="message-table">
-			<!--order by category first and then time -->
-				<tr ng-repeat-start="message in messages | customOrder:'category' | customOrder:'time' | filter: searchText | filter: filterCategory">
-					<td>
-					<div class="icon circle small" ng-class="message.category">
-						<img ng-src="{{getCategoryImg(message.category)}}" class="icon-img small">
-					</div>
-					</td>
-					<td style="width: 40px">
-						<img ng-src="{{message.sender.avartar}}" class="icon small">
-					</td>
-					<td>
-						{{message.sender.name}}
-					</td>
-					<td style="text-align: right;">
-						{{message.time| date:'yyyy-MM-dd'}}
-					</td>
-				</tr>
-				<tr>
-						<td></td>
-						<td colspan="4" style="padding-left:0.4em">{{message.content}}</td>
-				</tr>
-				<tr ng-repeat-end="">
-					<td>
-					</td>
-					<td>
-					</td>
-					<td>
-					</td>
-					<td style="text-align: right;">
-						<img src="../../../assets/imgs/share.png" class="xsmall">
-					
-						<img src="../../../assets/imgs/edit.png" class="xsmall">
-					
-						<img src="../../../assets/imgs/reply.png" class="xsmall">
-					</td>
-				</tr>
-			</table>
-
-		</div>
-
-	</div>
-</div>

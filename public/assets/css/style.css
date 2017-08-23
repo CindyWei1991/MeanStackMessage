@@ -19,15 +19,14 @@
 }
 
 
-body,html {
-    height: 100%
-}
 
 .avatar {
     height: 70px;
     width: 70px;
 }
-
+.clickable {
+    outline:none;
+}
 #searchBar{
     background-color: #092852;
     height: 50px;
@@ -48,6 +47,7 @@ body,html {
 .main-center.receive {
     padding: 0;
     width: 550px;
+    position: relative;
 }
 
 .vcenter {
@@ -117,4 +117,13 @@ body,html {
 }
 .panel-footer {
     min-height: 35px;
+}
+textarea {
+    width: 100%;
+}
+
+#sendBtn {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
