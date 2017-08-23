@@ -6,7 +6,7 @@ angular.module('mainController',[])
 		 		$scope.logoutMessage = data.data.message;
 		 		if (data.data.success) {
 		 			$timeout(function () {
-		 	    	$location.path('/login');
+		 	    		$location.path('/login');
 		 			}, 2000);
 		 		} else {
 		 			alert($scope.logoutMessage);
@@ -33,10 +33,21 @@ angular.module('mainController',[])
 
 
 
-.controller("flashbulbCtrl",function($scope, $http, $rootScope, mainFactory, $mdSidenav) {
+.controller("flashbulbCtrl",function($scope, $http, $rootScope, mainFactory, $mdSidenav, userFactory) {
 	$scope.sendingMessage = {};
 	$scope.sendingMessage.sendor = $rootScope.user;
 	$scope.sendingMessage.receiver = {};
+	$scope.user = {};
+	userFactory.getUser().then(function(data) {
+		if (data.data.success) {
+			$rootScope.userLoggedIn = true;
+			$scope.user.userName = data.data.user.userName;
+			$rootScope.user = data.data.user;
+		} else {
+			$scope.user.userName = "";
+			$rootScope.userLoggedIn = false;
+		}
+	});
 	mainFactory.getMessages().then(function(data) {
 		if (data.data.success) {
 			$scope.messages = data.data.message;
@@ -159,12 +170,12 @@ angular.module('mainController',[])
 	};
 	
 	  $scope.toggleLeft = function() {
-		  $mdSidenav("left")
+		  $mdSidenav("right")
 			.toggle();
 	  };
 	  
 	  $scope.close = function () {
-		$mdSidenav('left').close();
+		$mdSidenav('right').close();
 	  };
   
 })

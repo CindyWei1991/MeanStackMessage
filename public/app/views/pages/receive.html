@@ -5,7 +5,7 @@
 		<div class="main-login main-center receive">
 				<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" id="leftSideNav" md-disable-backdrop="true">
 						<md-toolbar class="md-theme-indigo" layout="row">
-						  <h1 class="md-toolbar-tools">Sidenav Left</h1>
+						  <h1 class="md-toolbar-tools">Hello {{user.userName}}</h1>
 						  <span flex></span>
 						  <md-button ng-click="close()">Close</md-button>
 						</md-toolbar>
@@ -13,7 +13,7 @@
 						  <md-button ng-click="show('home')" class="md-primary">Show Home</md-button>
 						  <md-button ng-click="show('work')" class="md-primary">Show Work</md-button>
 						</md-content>
-					  </md-sidenav>
+				</md-sidenav>
 			<div class="receive-header">
 				<div class="col-xs-3 vcenter">
 						<img src="../../../assets/imgs/avata-woman.png" class="avatar img-circle" ng-click="toggleLeft()">
@@ -27,22 +27,22 @@
 			</div>
 			<div class="container-fluid">
 				<div class="receive-body row row-centered">
-					<div class="col-xs-3 col-centered" ng-click="getMessages('fire')">
+					<div class="col-xs-3 col-centered clickable" ng-click="getMessages('fire')">
 						<img src="../../../assets/imgs/fire.png" class="category-icon" ng-class="{'active':getActive('fire')}">
 						<h4>Firedrill</h4>
 						<h4>{{fireCount}}</h4>
 					</div>
-					<div class="col-xs-3 col-centered" ng-click="getMessages('blocker')">
+					<div class="col-xs-3 col-centered clickable" ng-click="getMessages('blocker')">
 						<img src="../../../assets/imgs/cone.png" class="category-icon" ng-class="{'active':getActive('blocker')}">
 						<h4>Blocker</h4>
 						<h4>{{blockerCount}}</h4>
 					</div>
-					<div class="col-xs-3 col-centered" ng-click="getMessages('goodNews')">
+					<div class="col-xs-3 col-centered clickable" ng-click="getMessages('goodNews')">
 						<img src="../../../assets/imgs/goodNews.png" class="category-icon" ng-class="{'active':getActive('goodNews')}">
 						<h4>GoodNews</h4>
 						<h4>{{goodNewsCount}}</h4>
 					</div>
-					<div class="col-xs-3 col-centered" ng-click="getMessages('info')">
+					<div class="col-xs-3 col-centered clickable" ng-click="getMessages('info')">
 						<img src="../../../assets/imgs/info.png" class="category-icon" ng-class="{'active':getActive('info')}">
 						<h4>Info</h4>
 						<h4>{{infoCount}}</h4>
@@ -68,22 +68,5 @@
 	</div>
 </div>
 
-<section layout="row" flex="">
-
-	
-		<md-content flex="" layout-padding="" layout="column" layout-align="top center">
-		  <md-button ng-click="toggleLeft()" class="md-primary">
-			Toggle left
-		  </md-button>
-		  <div ng-switch="toShow">
-			<div ng-switch-when="home">
-			  Home!
-			</div>
-			<div ng-switch-when="work">
-			  Work!
-			</div>
-		  </div>
-		</md-content>
-	  </section>
 
 	

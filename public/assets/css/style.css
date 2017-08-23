@@ -24,7 +24,9 @@
     height: 70px;
     width: 70px;
 }
-
+.clickable {
+    outline:none;
+}
 #searchBar{
     background-color: #092852;
     height: 50px;
