@@ -170,12 +170,12 @@ angular.module('mainController',[])
 	};
 	
 	  $scope.toggleLeft = function() {
-		  $mdSidenav("right")
+		  $mdSidenav("left")
 			.toggle();
 	  };
 	  
 	  $scope.close = function () {
-		$mdSidenav('right').close();
+		$mdSidenav('left').close();
 	  };
   
 })

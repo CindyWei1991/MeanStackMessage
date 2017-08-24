@@ -10,8 +10,8 @@
 						  <md-button ng-click="close()">Close</md-button>
 						</md-toolbar>
 						<md-content layout-padding="" layout="column" layout-align="start start">
-						  <md-button ng-click="show('home')" class="md-primary">Show Home</md-button>
-						  <md-button ng-click="show('work')" class="md-primary">Show Work</md-button>
+						  <md-button ng-click="show('home')" class="md-primary">Sent Messages</md-button>
+						  <md-button ng-click="show('work')" class="md-primary">Unread Messages</md-button>
 						</md-content>
 				</md-sidenav>
 			<div class="receive-header">
@@ -51,7 +51,7 @@
 			</div>
 			<!-- <div class="well well-sm">Most Recent</div> -->
 			<div class="container-fluid">
-				<div class="panel" ng-repeat="message in messages" ng-class="getPanelClass(message.category)"> 
+				<div class="panel" ng-repeat="message in messages | customOrder:'category' | customOrder:'dateTime' | filter: searchText | filter: filterCategory" ng-class="getPanelClass(message.category)"> 
 					<div class="panel-heading" ng-class="message.category">{{message.sendor.userName}}</div>
 					<div class="panel-body">
 						{{message.text}}
