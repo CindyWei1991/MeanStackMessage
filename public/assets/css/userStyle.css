@@ -1,3 +1,4 @@
+
 .userAuth {
     background-image: url("../imgs/bg1.jpg");
     background-color: #cccccc;
@@ -9,6 +10,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    overflow: scroll
 }
 
 .main{

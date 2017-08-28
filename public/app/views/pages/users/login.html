@@ -8,7 +8,22 @@
 		</div>
 		<!--<div class="panel-heading">Login</div>-->
 		<div class="main-login main-center" >
-			
+			<!-- Loading Icon (Bootstrap) -->
+			<div class="jumbotron text-center" ng-show="warning.loading">
+				<span class="glyphicon glyphicon-repeat spinner"></span>
+				<p>Loading....</p>
+			</div>
+			<!-- Loading Icon (Bootstrap) -->
+		
+			<!-- Custom Messages -->
+			<div class="row" ng-show="warning.errorMessage">
+				<div class="alert alert-danger">{{ warning.errorMessage }}</div>
+			</div>
+
+			<div class="row" ng-show="warning.successMessage">
+					<div class="alert alert-success">{{ warning.successMessage}}</div>
+				</div>
+
 			<form ng-submit="login()" class="form-horizontal">
 				<!--email -->
 				<div class="form-group">
@@ -45,19 +60,4 @@
 			</form>
 		</div>
 	</div>
-
-
-
-	<!-- Loading Icon (Bootstrap) -->
-	<div class="jumbotron text-center" ng-show="warning.loading">
-		<span class="glyphicon glyphicon-repeat spinner"></span>
-		<p>Loading....</p>
-	</div>
-	<!-- Loading Icon (Bootstrap) -->
-
-	<!-- Custom Messages -->
-	<div class="row" ng-show="warning.successMessage|| warning.errorMessage">
-		<div class="alert alert-danger">{{ warning.successMessage || warning.errorMessage }}</div>
-	</div>
-	<!-- Custom Messages -->
 </div>

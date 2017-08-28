@@ -33,7 +33,7 @@ angular.module('mainController',[])
 
 
 
-.controller("flashbulbCtrl",function($scope, $http, $rootScope, mainFactory, $mdSidenav, userFactory) {
+.controller("flashbulbCtrl",function($scope, $http, $rootScope, $location, $timeout, mainFactory, $mdSidenav, userFactory) {
 	$scope.sendingMessage = {};
 	$scope.sendingMessage.sendor = $rootScope.user;
 	$scope.sendingMessage.receiver = {};
@@ -48,6 +48,23 @@ angular.module('mainController',[])
 			$rootScope.userLoggedIn = false;
 		}
 	});
+
+	$scope.logout = function() {
+		$location.path('/logout');
+		userFactory.logoutUser().then(function(data) {
+				$scope.logoutMessage = data.data.message;
+				if (data.data.success) {
+					$timeout(function () {
+						$location.path('/login');
+					}, 2000);
+				} else {
+					alert($scope.logoutMessage);
+				}
+				
+		})
+		
+   };
+
 	mainFactory.getMessages().then(function(data) {
 		if (data.data.success) {
 			$scope.messages = data.data.message;

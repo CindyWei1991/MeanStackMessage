@@ -50,7 +50,7 @@ angular.module('userControllers', [])
 			console.log(data)
 			if (data.data.success) {
 				$scope.warning.loading = false;
-				$scope.warning.successMessage = data.data.message + "Redirecting";
+				$scope.warning.successMessage = data.data.message + " Redirecting.....";
 				$timeout(function() {
 					$location.path('/');
 				}, 2000);
