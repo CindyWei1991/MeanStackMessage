@@ -127,6 +127,6 @@ textarea {
     margin-top: 20px;
     margin-bottom: 30px;
 }
-.container-fluid {
-    min-height: 400px;
+.container-fluid.messageBody {
+    min-height: 600px;
 }

@@ -51,7 +51,7 @@
 				</div>
 			</div>
 			<!-- <div class="well well-sm">Most Recent</div> -->
-			<div class="container-fluid">
+			<div class="container-fluid messageBody">
 				<div ng-if="messages.length > 0">
 					<div class="panel" ng-repeat="message in messages | customOrder:'category' | customOrder:'dateTime' | filter: searchText | filter: filterCategory" ng-class="getPanelClass(message.category)"> 
 						<div class="panel-heading" ng-class="message.category">{{message.sendor.userName}}</div>
