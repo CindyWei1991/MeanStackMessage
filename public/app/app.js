@@ -20,7 +20,7 @@ function categoryOrder(item) {
     }  
   }
 
-  flashApp.filter('customOrder', function() {
+flashApp.filter('customOrder', function() {
 	return function(items, field) {
 		var filtered = [];
     	angular.forEach(items, function(item) {
@@ -32,4 +32,6 @@ function categoryOrder(item) {
 
 		return filtered;
 	}
-})
+});
+
+

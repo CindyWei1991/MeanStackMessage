@@ -2,9 +2,8 @@ var app = angular.module('appRoutes', ['ngRoute'])
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/', {
-		templateUrl: 'app/views/pages/users/login.html',
-		controller: 'loginController',
-		authenticated: false
+		templateUrl: 'app/views/pages/home.html',
+		controller: 'mainCtrl',
 	})
 	
 	.when('/register', {
